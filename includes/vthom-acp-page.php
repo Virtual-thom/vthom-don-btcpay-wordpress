@@ -32,7 +32,7 @@ wp_enqueue_script('bootstrap');
 	<?php include 'vthom-don-settings.php'; ?>	
 </div>
   <div class="tab-pane fade" id="doc" role="tabpanel" aria-labelledby="doc-tab" tabindex="0">
-	<?php include 'vthom-don-doc.php'; ?>	
+ <a href="https://github.com/Virtual-thom/vthom-don-btcpay-wordpress/blob/main/README.md" >https://github.com/Virtual-thom/vthom-don-btcpay-wordpress/blob/main/README.md</a>	
 </div>
 </div>
 
