@@ -33,7 +33,7 @@ Your code (btcpay button or whatever) must have a custom input in order to add a
 Ex. `<input type="text" name="checkoutDesc" placeholder="Pseudo (optionnel)">`
 
 full example of btcpay button for donation :  
-```htlm
+```html
 <form method="post" action="https://btcpay.virtual-thom.dynv6.net/api/v1/invoices"
   class="btcpay-form btcpay-form--inline"> <input type="hidden" name="storeId"
     value="F9DHb5TGfZWC4jCre2DgnWRsSpGesUoJiMc4UgMYASxW">
