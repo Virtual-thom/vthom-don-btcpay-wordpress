@@ -3,6 +3,8 @@ Automatically add a donater when an invoice btcpay is settled, with a minimum am
 Or you can manage donaters manually.  
 Display donaters list with the shortcode [vthom_don_shortcode_donaters]
 
+![./wp_plugin_admin.png](wp_plugin_admin.png)
+
 # Get Started
 Go to `wordpressdir`/wp-content/plugins
 
@@ -14,6 +16,7 @@ Go to your admin wordpress backend and activate "Donaters" plugin.
 Add "Settings" (only twitter_api is not mandatory).  
 
 ![./btcpay_settings_webhook.png](btcpay_settings_webhook.png)
+
 
 From BTCPAY Server :  
 STORE ID : your store Id.  
