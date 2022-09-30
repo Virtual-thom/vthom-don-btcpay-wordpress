@@ -13,7 +13,7 @@ git clone https://github.com/Virtual-thom/vthom-don-btcpay-wordpress.git
 Go to your admin wordpress backend and activate "Donaters" plugin.  
 Add "Settings" (only twitter_api is not mandatory).  
 
-[!btcpay_settings_webhook.png](btcpay_settings_webhook.png)
+![./btcpay_settings_webhook.png](btcpay_settings_webhook.png)
 
 From BTCPAY Server :  
 STORE ID : your store Id.  
