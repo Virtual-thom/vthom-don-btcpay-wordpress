@@ -20,13 +20,14 @@ STORE SECRET : webhook secret in order to check BTCPay Sig [https://docs.btcpays
 BTCPAY API KEY : your API KEY in account settings with minimum permission to view invoices `btcpay.store.canviewinvoices`  
 MIN AMOUNT of Donation : example 20  
 CURRENCY (for MIN AMOUNT) : exemple EUR  
+
 TWITTER API : your Twitter API to get information if the donater begin with @  
 
 Your code (btcpay button or whatever) must have a custom input in order to add an item description in invoices and add a donater name.  
 Ex. `<input type="text" name="checkoutDesc" placeholder="Pseudo (optionnel)">`
 
 full example :  
-```
+```htlm
 <form method="post" action="https://btcpay.virtual-thom.dynv6.net/api/v1/invoices"
   class="btcpay-form btcpay-form--inline"> <input type="hidden" name="storeId"
     value="F9DHb5TGfZWC4jCre2DgnWRsSpGesUoJiMc4UgMYASxW">
