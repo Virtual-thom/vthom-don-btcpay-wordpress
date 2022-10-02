@@ -33,7 +33,7 @@ foreach($donaters as $donater){
 	$profile_image_url = "https://fr.gravatar.com/avatar";
 	$donater_name = $donater->name ;
 	if($twitterPerson){
-		$profile_image_url = $twitterPerson->data->profile_image_url ; 
+		$profile_image_url = preg_replace('/^(.*)_normal\.(.*)$/','${1}.${2}',$twitterPerson->data->profile_image_url); 
 		$donater_name = "$donater_name<br>" . $twitterPerson->data->name ;
 	}
 
