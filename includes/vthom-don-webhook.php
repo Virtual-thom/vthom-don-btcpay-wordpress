@@ -39,9 +39,21 @@ function getInvoiceDetails($invoiceId){
 	return $invoice ;
 }
 
+/* API to convert currency to BTC
+ * blockchain.info
+ */
+function convertCurrencyToBTC($currency,$amount){
+	return file_get_contents("https://blockchain.info/tobtc?currency=$currency&value=$amount");
+}
+
+/*
+
 /*
  * Webhook receiver callback
  * add a donater if invoice is settled and more than min amount expected
+ */
+/* BTCPAY SIG 
+ * https://docs.btcpayserver.org/API/Greenfield/v1/#operation/Webhooks_CreateWebhook
  */
 if(isset($header_hash) &&
         $header_hash == "sha256=".hash_hmac('sha256', $body, $secret)
@@ -51,14 +63,24 @@ if(isset($header_hash) &&
         $BODY = json_decode($body) ;
 	//file_put_contents( plugin_dir_path(__FILE__) .'tmp/invoice',$invoice) ; // #DEBUG
 	//file_put_contents( plugin_dir_path(__FILE__) .'tmp/invoiceType',$BODY->type) ; // #DEBUG
+	// only take InvoiceSettled (which is actually paid and terminate)
 	if($BODY->type == "InvoiceSettled"){
 		$invoiceId = $BODY->invoiceId ;
 		//file_put_contents( plugin_dir_path(__FILE__) .'tmp/invoiceIdInIf',$invoiceId) ; // #DEBUG
 		$invoice = json_decode(getInvoiceDetails($invoiceId)) ;
+		$invoiceInBTC = ( strtolower($invoice->currency) != "btc" ) ? 
+			convertCurrencyToBTC($invoice->currency,$invoice->amount) :
+		       	$invoice->amount;  
+		$minDonInBTC = ( strtolower($settings->don_currency) != "btc" ) ? 
+			convertCurrencyToBTC($settings->don_currency,$settings->don_min) : 
+		    	$settings->don_min;  
+		/*
 		if(intval($invoice->amount) > $settings->don_min 
 			&& 
 			$invoice->currency == $settings->don_currency
 		){
+ 		*/
+		if(floatval($invoiceInBTC) >= floatval($minDonInBTC)){
 
 			$donater = $invoice->metadata->itemDesc ;
 			if(is_string($donater) && $donater != ""){
