@@ -1,95 +1,43 @@
-# Plugin Wordpress
+# BTCPay Donors - Wordpress plugin
 
-Automatically add a donor when an invoice btcpay is settled, with a minimum amount.
-Or you can manage donors manually.
-Display donors list with the shortcode [btcpay_donors_shortcode_donors]
+Display your BTCPay Donors directly on your Wordpress website. Donors can add their Twitter username to the donation description in order for their profile picture to get fetched and displayed in the donors list.
 
-![./wp_plugin_admin.png](wp_plugin_admin.png)
+Use the shortcode [btcpay_donors_shortcode_donors] to display the list.
 
-# Get Started
+## Configuration
 
-Go to `wordpressdir`/wp-content/plugins
+### BTCPay Server
 
-```
-git clone https://github.com/Virtual-thom/btcpay-donors-btcpay-wordpress.git
-```
+#### Get your Store ID
 
-Go to your admin wordpress backend and activate "Donors" plugin.
-Add "Settings" (only twitter_api_key is not mandatory).
+Go to your BTCPay Server Store's settings and copy the `Store ID` to the plugin settings page.
 
-![./btcpay_settings_webhook.png](btcpay_settings_webhook.png)
+<img src="docs/btcpay-id.png" style="width: 500px;" />
 
-From BTCPAY Server :
-STORE ID : your store Id.
-STORE URL : your BTCPay Server url.
-STORE SECRET : webhook secret in order to check BTCPay Sig [https://docs.btcpayserver.org/API/Greenfield/v1/#operation/Webhooks_UpdateWebhook](https://docs.btcpayserver.org/API/Greenfield/v1/#operation/Webhooks_UpdateWebhook)
-the btcpay webhook url you've created has to be : `yourwordpressurl`/wp-json/btcpay-donors/callback
-BTCPAY API KEY : your API KEY in account settings with minimum permission to view invoices `btcpay.store.canviewinvoices`
-MIN AMOUNT of Donation : example 20
-CURRENCY (for MIN AMOUNT) : exemple EUR
+#### Get your API Key
 
-TWITTER API : your Twitter API to get information if the donor begin with @
+Go to your BTCPay Server Account's settings, and click the `API Keys` tab.
 
-Your code (btcpay button or whatever) must have a custom input in order to add an item description in invoices and add a donor name.
-Ex. `<input type="text" name="checkoutDesc" placeholder="Pseudo (optionnel)">`
+<img src="docs/btcpay-keys.png" style="width: 500px;" />
 
-full example of btcpay button for donation :
+Generate a new key and click `Select specific stores` for `View invoices`. Select your store, then generate the key with the submit button.
 
-```html
-<form method="post" action="https://btcpay.virtual-thom.dynv6.net/api/v1/invoices" class="btcpay-form btcpay-form--inline">
-  <input type="hidden" name="storeId" value="F9DHb5TGfZWC4jCre2DgnWRsSpGesUoJiMc4UgMYASxW" />
-  <div class="btcpay-custom-container">
-    <div class="btcpay-custom"><input type="text" name="checkoutDesc" placeholder="Pseudo (optionnel)" /></div>
-    <div class="btcpay-custom">
-      <button
-        class="plus-minus"
-        type="button"
-        onclick="if (!window.__cfRLUnblockHandlers) return false; handlePlusMinus(event);return false"
-        data-type="-"
-        data-step="1"
-        data-min="1"
-        data-max="20"
-      >
-        -
-      </button>
-      <input
-        class="btcpay-input-price"
-        type="number"
-        name="price"
-        min="1"
-        max="20"
-        step="1"
-        value="1"
-        data-price="1"
-        style="width:3em"
-        oninput="if (!window.__cfRLUnblockHandlers) return false; handlePriceInput(event);return false"
-      />
-      <button
-        class="plus-minus"
-        type="button"
-        onclick="if (!window.__cfRLUnblockHandlers) return false; handlePlusMinus(event);return false"
-        data-type="+"
-        data-step="1"
-        data-min="1"
-        data-max="20"
-      >
-        +
-      </button>
-    </div>
-    <select name="currency">
-      <option value="USD">USD</option>
-      <option value="GBP">GBP</option>
-      <option value="EUR" selected="">EUR</option>
-      <option value="BTC">BTC</option>
-    </select>
-  </div>
-  <input
-    type="image"
-    class="submit"
-    name="submit"
-    src="assets/images/BTCPay_Server_Icon.png"
-    style="width:30px"
-    alt="Pay with BTCPay Server, a Self-Hosted Bitcoin Payment Processor"
-  />
-</form>
-```
+<img src="docs/btcpay-add-key.png" style="width: 500px;" />
+
+Copy the generated key to `API Key` in the plugin settings page.
+
+#### Setup the webhook
+
+Go to your BTCPay Server Store's settings, and click the `Webhooks` tab.
+
+<img src="docs/btcpay-webhooks.png" style="width: 500px;" />
+
+Create a new webhook with URL `https://your-website.org/wp-json/btcpay-donors/v1/callback`, triggered by the specific event `an invoice has been settled`. Copy the secret to `Store Secret` in the plugin settings page.
+
+<img src="docs/btcpay-add-webhook.png" style="width: 500px;" />
+
+## Screenshots
+
+<img src="docs/settings.png" />
+<img src="docs/admin-donors.png" />
+<img src="docs/donors.png" />

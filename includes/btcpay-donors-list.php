@@ -5,12 +5,16 @@ function btcpay_donors_get_donor_image($donor_name)
 {
   $btcpay_donors_options = get_option("btcpay_donors");
   $profile_image_url = "https://fr.gravatar.com/avatar";
-  if (isset($btcpay_donors_options["twitter_api_key"]) && preg_match("/^@.*/", $donor_name) && $btcpay_donors_options["twitter_api_key"] != "") {
+  if (
+    isset($btcpay_donors_options["twitter_bearer_token"]) &&
+    preg_match("/^@.*/", $donor_name) &&
+    $btcpay_donors_options["twitter_bearer_token"] != ""
+  ) {
     $url = "https://api.twitter.com/1.1/users/show.json?screen_name=" . str_replace("@", "", $donor_name);
     $args = [
       "headers" => [
         "Content-Type" => "application/json",
-        "Authorization" => "Bearer " . $btcpay_donors_options["twitter_api_key"],
+        "Authorization" => "Bearer " . $btcpay_donors_options["twitter_bearer_token"],
       ],
     ];
 

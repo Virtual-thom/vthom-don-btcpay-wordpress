@@ -88,9 +88,9 @@ function btcpay_donors_settings_init()
   );
 
   add_settings_field(
-    "twitter_api_key", // id
-    "API Key (read)", // title
-    "twitter_api_key_callback", // callback
+    "twitter_bearer_token", // id
+    "Bearer Token", // title
+    "twitter_bearer_token_callback", // callback
     "btcpay-donors-admin", // page
     "btcpay_donors_setting_twitter" // section
   );
@@ -141,8 +141,8 @@ function btcpay_donors_sanitize($input)
     $sanitary_values["minimum_donation_amount_currency"] = $input["minimum_donation_amount_currency"];
   }
 
-  if (isset($input["twitter_api_key"])) {
-    $sanitary_values["twitter_api_key"] = sanitize_text_field(str_replace("%3D", "=", $input["twitter_api_key"]));
+  if (isset($input["twitter_bearer_token"])) {
+    $sanitary_values["twitter_bearer_token"] = sanitize_text_field(str_replace("%3D", "=", $input["twitter_bearer_token"]));
   }
 
   if (isset($input["custom_css"])) {
@@ -254,12 +254,12 @@ function minimum_donation_amount_currency_callback()
 		</select> <?php
 }
 
-function twitter_api_key_callback()
+function twitter_bearer_token_callback()
 {
   $btcpay_donors_options = get_option("btcpay_donors");
   printf(
-    '<input class="regular-text" type="text" name="btcpay_donors[twitter_api_key]" id="twitter_api_key" value="%s">',
-    isset($btcpay_donors_options["twitter_api_key"]) ? esc_attr($btcpay_donors_options["twitter_api_key"]) : ""
+    '<input class="regular-text" type="text" name="btcpay_donors[twitter_bearer_token]" id="twitter_bearer_token" value="%s">',
+    isset($btcpay_donors_options["twitter_bearer_token"]) ? esc_attr($btcpay_donors_options["twitter_bearer_token"]) : ""
   );
 }
 

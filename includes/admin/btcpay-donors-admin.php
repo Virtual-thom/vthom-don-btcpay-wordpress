@@ -80,5 +80,5 @@ function btcpay_donors_pages_init()
  * $btcpay_api_key = $btcpay_donors_options['btcpay_api_key']; // BTCPay API Key
  * $minimum_donation_amount = $btcpay_donors_options['minimum_donation_amount']; // Minimum donation amount to be displayed
  * $minimum_donation_amount_currency = $btcpay_donors_options['minimum_donation_amount_currency']; // Minimum donation amount currency
- * $twitter_api_key = $btcpay_donors_options['twitter_api_key']; // Twitter API Key
+ * $twitter_bearer_token = $btcpay_donors_options['twitter_bearer_token']; // Twitter Bearer Token
  */
